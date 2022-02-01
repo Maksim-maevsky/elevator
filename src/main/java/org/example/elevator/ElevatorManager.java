@@ -96,7 +96,6 @@ public class ElevatorManager extends Thread {
         return true;
     }
 
-    @SneakyThrows
     private void getOffTheElevator(int currentFloor) {
 
         for (User user : personsIN) {

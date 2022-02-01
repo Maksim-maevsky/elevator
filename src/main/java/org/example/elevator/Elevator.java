@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Elevator implements Runnable {
 
     private static final int FLOORS_CAPACITY = 10;
-    private static volatile AtomicInteger currentFloor =  new AtomicInteger(0);
+    private static AtomicInteger currentFloor =  new AtomicInteger(0);
     private static Elevator elevator;
     private static volatile boolean isUP = true;
 
@@ -27,7 +27,6 @@ public final class Elevator implements Runnable {
 
     }
 
-    @SneakyThrows
     public static void launch() {
 
         if (elevator == null) {
@@ -58,7 +57,6 @@ public final class Elevator implements Runnable {
         }
     }
 
-    @SneakyThrows
     private static void moveBetweenFloors() {
 
         while (true) {

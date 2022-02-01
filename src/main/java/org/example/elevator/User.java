@@ -23,7 +23,6 @@ public class User extends Thread {
         this.userName = name;
     }
 
-    @SneakyThrows
     @Override
     public void run() {
 
