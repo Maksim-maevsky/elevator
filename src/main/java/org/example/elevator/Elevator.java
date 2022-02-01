@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Slf4j
 @Data
 public final class Elevator implements Runnable {
 
     private static final int FLOORS_CAPACITY = 10;
-    private static volatile int currentFloor = 0;
+    private static volatile AtomicInteger currentFloor =  new AtomicInteger(0);
     private static Elevator elevator;
     private static volatile boolean isUP = true;
 
@@ -40,18 +42,18 @@ public final class Elevator implements Runnable {
 
     private static void decrementCurrentFloor() {
 
-        if (!isUP && currentFloor != 1) {
+        if (!isUP && currentFloor.get() != 1) {
 
-            currentFloor--;
+            currentFloor.getAndDecrement();
 
         }
     }
 
     private static void incrementCurrentFloor() {
 
-        if (isUP && currentFloor < FLOORS_CAPACITY) {
+        if (isUP && currentFloor.get() < FLOORS_CAPACITY) {
 
-            currentFloor++;
+            currentFloor.getAndIncrement();
 
         }
     }
@@ -65,17 +67,17 @@ public final class Elevator implements Runnable {
 
             decrementCurrentFloor();
 
-            log.info("CURRENT FLOOR : =======> " + Elevator.currentFloor);
+            log.info("CURRENT FLOOR : =======> " + Elevator.currentFloor.get());
 
             tryToSleep(2000);
 
-            if (currentFloor == FLOORS_CAPACITY) {
+            if (currentFloor.get() == FLOORS_CAPACITY) {
 
                 isUP = false;
 
             }
 
-            if (currentFloor == 1) {
+            if (currentFloor.get() == 1) {
 
                 isUP = true;
 
@@ -102,7 +104,7 @@ public final class Elevator implements Runnable {
     }
 
     public static int getCurrentFloor() {
-        return currentFloor;
+        return currentFloor.get();
     }
 
     public static boolean isIsUP() {
