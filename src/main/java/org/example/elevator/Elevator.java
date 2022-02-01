@@ -91,7 +91,7 @@ public final class Elevator implements Runnable {
 
         } catch (InterruptedException e) {
 
-            System.err.println(e.getMessage());
+            log.error(e.getMessage());
             Thread.currentThread().interrupt();
 
         }

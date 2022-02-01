@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Data
 public class ElevatorManager extends Thread {
 
-    private static volatile ElevatorManager elevatorManager;
+    private static ElevatorManager elevatorManager;
     private static CopyOnWriteArrayList<User> personsOUT = new CopyOnWriteArrayList<>();
     private static CopyOnWriteArrayList<User> personsIN = new CopyOnWriteArrayList<>();
     private static User nextStopIN;
