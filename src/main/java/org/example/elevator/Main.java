@@ -1,4 +1,4 @@
-package org.example.liftThread;
+package org.example.elevator;
 
 import lombok.SneakyThrows;
 
